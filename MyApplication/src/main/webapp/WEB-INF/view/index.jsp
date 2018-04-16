@@ -3,24 +3,31 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>PAW | home</title>
+<title>Catering | home</title>
 <link href="static/css/bootstrap.min.css" rel="stylesheet">
 <link href="static/css/style.css" rel="stylesheet">
+<script src="static/js/jquery-1.11.1.min.js"></script>
+	<script src="static/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<div role="navigation">
 		<div class="navbar navbar-inverse">
-		   <a style="float:right" href="#" class="navbar-brand">${currentuser.firstname} ${currentuser.lastname}</a>
-			 
+			<a href="/" class="navbar-brand">Catering</a>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav">
-				<li style="margin-left:950px;float:right"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span>Cos</a></li>
-				<li style="float:right"><a href="/logout">Logout</a></li>
-			    <li ><a href="#">Meniu</a></li>   	
-				<li ><a href="#">Utilizatori inregistrati</a></li>
+					<li><a href="/login">Login</a></li>
+					<li><a href="/register">New Registration</a>
 				</ul>
 			</div>
 		</div>
 	</div>
+
+	<div class="container" id="homediv">
+		<div class="jumbotron text-center">
+			<h1>Welcome</h1>
+			<h3>Created by Madalina</h3>
+		</div>
+	</div>
+	
 </body>
 </html>

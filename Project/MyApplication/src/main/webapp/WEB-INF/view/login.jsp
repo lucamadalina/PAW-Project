@@ -1,58 +1,78 @@
-<!DOCTYPE html >
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page session="true"%>
 <html>
 <head>
-<meta charset="utf-8">
-<title>RegistraturaClone | home</title>
-<link href="static/css/bootstrap.min.css" rel="stylesheet">
-<link href="static/css/style.css" rel="stylesheet">
+<title>Login Page</title>
+<style>
+.error {
+	padding: 15px;
+	margin-bottom: 20px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	color: #a94442;
+	background-color: #f2dede;
+	border-color: #ebccd1;
+}
 
+.msg {
+	padding: 15px;
+	margin-bottom: 20px;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	color: #31708f;
+	background-color: #d9edf7;
+	border-color: #bce8f1;
+}
+
+#login-box {
+	width: 300px;
+	padding: 20px;
+	margin: 100px auto;
+	background: #fff;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border: 1px solid #000;
+}
+</style>
 </head>
-<body>
+<body onload='document.loginForm.username.focus();'>
 
+	<h1>Spring Security Login Form (Database Authentication)</h1>
 
-	<div role="navigation">
-		<div class="navbar navbar-inverse">
-			<a href="/" class="navbar-brand">RegistraturaClone</a>
-			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav">
-				<li><a href="/">Inapoi</a></li>
-				</ul>
-			<ul class="nav navbar-nav navbar-right">
-		      <li><a href="/register"><span class="glyphicon glyphicon-user"></span>Creaza-ti cont</a></li>
-		    </ul>
-			</div>
-		</div>
+	<div id="login-box">
+
+		<h2>Login with Username and Password</h2>
+
+		<c:if test="${not empty error}">
+			<div class="error">${error}</div>
+		</c:if>
+		<c:if test="${not empty msg}">
+			<div class="msg">${msg}</div>
+		</c:if>
+
+		<form name='loginForm'
+		  action="<c:url value='/j_spring_security_check' />" method='POST'>
+
+		<table>
+			<tr>
+				<td>User:</td>
+				<td><input type='text' name='username'></td>
+			</tr>
+			<tr>
+				<td>Password:</td>
+				<td><input type='password' name='password' /></td>
+			</tr>
+			<tr>
+				<td colspan='2'><input name="submit" type="submit"
+				  value="submit" /></td>
+			</tr>
+		  </table>
+
+		  <input type="hidden" name="${_csrf.parameterName}"
+			value="${_csrf.token}" />
+
+		</form>
 	</div>
-	<div class="container text-center">
-	<h3>User Login</h3>
-		<hr>
-			<form class="form-horizontal" method="post" action="/login-user">
-				<c:if test="${not empty error }">
-					<div class= "alert alert-danger">
-						<c:out value="${error }"></c:out>
-						</div>
-				</c:if>
-						<div class="form-group">
-							<label class="control-label col-md-3">Username</label>
-							<div class="col-md-7">
-								<input type="text" class="form-control" name="username"
-									value="${user.username}" required="required" />
-							</div>
-						</div>
-						<div class="form-group">
-							<label class="control-label col-md-3">Parola</label>
-							<div class="col-md-7">
-								<input type="password" class="form-control" name="password"
-									value="${user.password}" required="required" />
-							</div>
-						</div>
-						<div class="form-group ">
-							<input type="submit" class="btn btn-primary" value="Login" />
-						</div>
-						</form>
-						<p>Nu esti inca inregistrat? Inscrie-te acum </p>
-						<a href="/register">Inregistrare</a>
-						</div>
+
 </body>
 </html>
